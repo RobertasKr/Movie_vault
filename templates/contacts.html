@@ -1,0 +1,25 @@
+<!-- templates/contacts.html -->
+{% extends "base.html" %}
+{% block content %}
+<section id="contact">
+    <h2>Contact Us</h2>
+    <p>If you have any questions, suggestions, or just want to get in touch, feel free to reach out! We're always happy to hear from movie enthusiasts.</p>
+
+    <ul>
+        <li><strong>Email:</strong> <a href="mailto:robertas.krasausk@gmail.com">robertas.krasausk@gmail.com</a></li>
+        <li><strong>Location:</strong> Kaunas, Lithuania</li>
+        <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/robertas-kra%C5%A1auskas/">Link</a></li>
+        <li><strong>GitHub:</strong> <a href="https://github.com/RobertasKr">Link</a></li>
+    </ul>
+
+    <p>Whether you want to give feedback on the website or share your thoughts on movies, don’t hesitate to contact us!</p>
+
+    <h3>Send us a Message</h3>
+    <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</section>
+
+{% endblock %}

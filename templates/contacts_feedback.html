@@ -1,0 +1,18 @@
+<!-- templates/contacts_feedback.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Contact Feedback</h1>
+
+<ul>
+    {% for feedback in feedback_list %}
+    <li>
+        <strong>{{ feedback.name }} ({{ feedback.email }})</strong><br>
+        {{ feedback.message }}<br>
+        <small>Submitted on {{ feedback.created_at }}</small>
+    </li>
+    <hr>
+    {% endfor %}
+</ul>
+
+{% endblock %}

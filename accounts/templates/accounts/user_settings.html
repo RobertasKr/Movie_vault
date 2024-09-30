@@ -1,0 +1,44 @@
+
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <h2>User Settings</h2>
+
+    <!-- Display success message -->
+    {% if form.is_bound and form.is_valid %}
+        <div class="alert alert-success">
+            Password changed successfully!
+        </div>
+    {% endif %}
+
+    <!-- Change Password Form -->
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.non_field_errors }}
+            <div class="form-group">
+                {{ form.old_password.label_tag }}
+                {{ form.old_password }}
+                {{ form.old_password.errors }}
+            </div>
+            <div class="form-group">
+                {{ form.new_password1.label_tag }}
+                {{ form.new_password1 }}
+                {{ form.new_password1.errors }}
+            </div>
+            <div class="form-group">
+                {{ form.new_password2.label_tag }}
+                {{ form.new_password2 }}
+                {{ form.new_password2.errors }}
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Change Password</button>
+    </form>
+
+    <!-- Logout Button -->
+    <form method="post" action="{% url 'logout' %}" style="margin-top: 20px;">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Logout</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+{% if user.is_superuser %}
+    <h1>Welcome, Admin!</h1>
+    <p>This content is only visible to superusers.</p>
+
+<a href="{% url 'contacts_feedback' %}" class="btn btn-secondary">Feedback</a>
+
+{% else %}
+    <p>You do not have permission to view this content.</p>
+{% endif %}
+
+{% endblock %}
+

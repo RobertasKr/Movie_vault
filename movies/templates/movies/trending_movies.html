@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<h1 class="text-center">Trending Movies This Week</h1>
+<div class="row row-cols-1 row-cols-md-6 g-4">
+  {% for movie in movies %}
+  <div class="col">
+    <div class="card h-100 bg-secondary" >
+      <a href="{% url 'movie_detail' movie.id %}">
+        <img src="{{ movie.poster_url }}" class="card-img-top" alt="{{ movie.title }} Poster">
+      </a>
+      <div class="card-body">
+        <h5 class="card-title">{{ movie.title }}</h5>
+        <p class="card-text">{{ movie.release_date }}</p>
+      </div>
+      <div class="card-footer bg-warning">
+        <small class="text-dark">Rating: {{ movie.vote_average }}</small>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}
+

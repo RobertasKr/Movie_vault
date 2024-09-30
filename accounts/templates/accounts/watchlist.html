@@ -1,0 +1,46 @@
+<!-- templates/accounts/watchlist.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{ user.username }}'s Watchlist</h1>
+
+<div class="row row-cols-1 row-cols-md-4 g-4">
+    {% for movie in watchlist_movies %}
+    <div class="col">
+        <div class="card h-100 bg-secondary">
+            <a href="{% url 'movie_detail' movie.movie_id %}">
+                <!-- Use consistent image dimensions and maintain aspect ratio -->
+                <img src="https://image.tmdb.org/t/p/w500/{{ movie.movie_poster }}"
+                     alt="{{ movie.movie_title }} poster"
+                     class="card-img-top img-fluid"
+                     style="height: 500px; object-fit: cover;"> <!-- Adjust height to your preference -->
+            </a>
+            <div class="card-body">
+                <h5 class="card-title">{{ movie.movie_title }}</h5>
+                <p class="card-text">Release Date: {{ movie.release_date }}</p>
+                <p class="card-text">Genres: {{ movie.genre }}</p>
+                <p class="card-text">Rating: {{ movie.rating }}</p>
+            </div>
+            <div class="card-footer bg-warning d-flex justify-content-between">
+                <!-- Remove button -->
+                <a href="{% url 'remove_from_watchlist' movie.movie_id %}" class="btn btn-danger">Remove</a>
+
+                <!-- Watched button -->
+                <form action="{% url 'toggle_watched' movie.movie_id %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit"
+                            class="btn {% if movie.watched %}btn-success{% else %}btn-outline-secondary{% endif %}">
+                        {% if movie.watched %}
+                            Watched
+                        {% else %}
+                            Mark as Watched
+                        {% endif %}
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
